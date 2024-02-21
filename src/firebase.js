@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-catch */
 import { initializeApp } from "firebase/app";
-import { FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, onAuthStateChanged  } from "firebase/auth";
 
 const API_KEY = import.meta.env.VITE_FIREBASE_API_KEY;
 const AUTH_DOMAIN = import.meta.env.VITE_FIREBASE_AUTH_DOMAIN;
