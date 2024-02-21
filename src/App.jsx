@@ -1,25 +1,31 @@
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Navbar from "./components/Navber";
-import TodoList from "./components/Todolist";
+import { Provider } from "react-redux";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Page from "./Page";
+import PrivateRoute from "./PrivateRoute";
+import Login from "./components/auth/Login";
+import Registration from "./components/auth/register";
+import store from "./redux/store";
+import Forget from "./components/auth/forget";
 
 const App = () => {
   return (
-    <div className="grid place-items-center bg-blue-100 h-screen px-6 font-sans">
-    <Navbar />
-
-    <div className="w-full max-w-3xl shadow-lg rounded-lg p-6 bg-white">
-        <Header />
-
-        <hr className="mt-4" />
-
-        <TodoList />
-
-        <hr className="mt-4" />
-
-        <Footer />
+    <div>
+      <Provider store={store}>
+        <Router>
+          <Routes>
+            <Route element={<PrivateRoute />}>
+              <Route path="/" element={<Page />} exact />
+            </Route>
+            <Route exact path="/reset" element={ <Forget /> } />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<Registration />} />
+          </Routes>
+        </Router>
+      </Provider>
+      <ToastContainer />
     </div>
-</div>
   );
 };
 
