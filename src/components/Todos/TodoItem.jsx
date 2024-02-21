@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import cancelImage from "../assets/images/cancel.png";
-import { colorSelected, removed, toggled } from "../redux/todos/actions";
+import cancelImage from "../../assets/images/cancel.png";
+import { colorSelected, removed, toggled } from "../../redux/todos/actions";
+import { toast } from 'react-toastify';
 
 const TodoItem = ({ todo }) => {
   const { id, text, completed, color } = todo;
@@ -17,6 +18,9 @@ const TodoItem = ({ todo }) => {
 
   const handleDelete = (id) => {
     dispatch(removed(id));
+    toast.error("Todo removed successfully", {
+      autoClose:900
+    });
   };
 
   return (

@@ -1,14 +1,33 @@
-import TodoHeader from "./components/TodoHeader";
-import HeroSection from "./components/HeroSection";
-import Navbar from "./components/Navbar";
-import TodoFooter from "./components/TodoFooter";
-import TodoList from "./components/TodoList";
-import Footer from "./components/Footer";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import HeroSection from "./components/Header/HeroSection";
+import Navbar from "./components/Header/Navbar";
+import Footer from "./components/Todos/Footer";
+import TodoFooter from "./components/Todos/TodoFooter";
+import TodoHeader from "./components/Todos/TodoHeader";
+import TodoList from "./components/Todos/TodoList";
+import { auth, signOut } from "./firebase";
 
 const Page = () => {
+  const navigation = useNavigate();
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        setTimeout(() => {
+          navigation("/login");
+        }, 1500);
+
+        toast.success("You have been logged out successfully");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
   return (
     <div className="grid place-items-center bg-blue-100 h-full px-6 font-sans">
-      <Navbar />
+      <Navbar onLogout={handleLogout} />
       <HeroSection />
       <div className="w-full max-w-3xl shadow-lg rounded-lg p-6 bg-white">
         <TodoHeader />
