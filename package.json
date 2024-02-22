@@ -4,13 +4,13 @@
   "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host ",
+    "dev": "vite ",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "concurrently \"node ./json-server-todos/db_todos.json --port 5000\" \"vite --host\"",
     "server": "json-server --watch ./json-server-todos/db_todos.json --port 5000",
-    "start": "npm-run-all build preview server"
+    "start": "npm-run-all build server"
   },
   "dependencies": {
     "concurrently": "^8.2.2",

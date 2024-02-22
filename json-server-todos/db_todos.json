@@ -10,12 +10,6 @@
       "text": "Learn Redux Basics",
       "completed": true,
       "id": 4,
-      "color": "red"
-    },
-    {
-      "text": "Learn Redux fundamentals",
-      "completed": true,
-      "id": 5,
       "color": "green"
     }
   ]
