@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import tickImage from "../../assets/images/double-tick.png";
 import noteImage from "../../assets/images/notes.png";
 import plusImage from "../../assets/images/plus.png";
-import { added, allCompleted, clearCompleted } from "../../redux/todos/actions";
-import { toast } from 'react-toastify';
+import { allCompleted, clearCompleted } from "../../redux/todos/actions";
+import addTodo from "../../redux/todos/thunk/addTodo";
 
 const Header = () => {
   const [input, setInput] = useState("");
@@ -17,9 +18,9 @@ const Header = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(added(input));
+    dispatch(addTodo(input));
     toast.success("Todo added successfully", {
-      autoClose:1200
+      autoClose: 1200,
     });
     setInput("");
   };
@@ -31,9 +32,8 @@ const Header = () => {
   const clearAll = () => {
     dispatch(clearCompleted());
     toast.success("Completed todos cleared successfully", {
-      autoClose:700
+      autoClose: 700,
     });
-
   };
 
   return (

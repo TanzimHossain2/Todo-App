@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form";
-
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { loginWithEmailAndPassword, signInWithGoogle } from "../../../firebase";
-
 import { toast } from "react-toastify";
 
 const LeftSide = () => {

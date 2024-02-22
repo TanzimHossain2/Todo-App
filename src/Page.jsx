@@ -11,18 +11,18 @@ import { auth, signOut } from "./firebase";
 const Page = () => {
   const navigation = useNavigate();
 
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        setTimeout(() => {
-          navigation("/login");
-        }, 1500);
-
-        toast.success("You have been logged out successfully");
-      })
-      .catch((error) => {
-        toast.error(error.message);
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      toast.success("You have been logged out successfully", {
+        autoClose: 1000,
       });
+      setTimeout(() => {
+        navigation("/login");
+      }, 2000);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (

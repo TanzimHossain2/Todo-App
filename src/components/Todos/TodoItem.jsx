@@ -1,32 +1,34 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import cancelImage from "../../assets/images/cancel.png";
-import { colorSelected, removed, toggled } from "../../redux/todos/actions";
-import { toast } from 'react-toastify';
+import removeTodo from "../../redux/todos/thunk/removeTodo";
+import updateColor from "../../redux/todos/thunk/updateColor";
+import updateStatus from "../../redux/todos/thunk/updateStatus";
 
 const TodoItem = ({ todo }) => {
   const { id, text, completed, color } = todo;
   const dispatch = useDispatch();
 
   const handleStatusChange = (id) => {
-    dispatch(toggled(id));
+    dispatch(updateStatus(id, completed));
   };
 
   const handleColorChange = (id, color) => {
-    dispatch(colorSelected(id, color));
+    dispatch(updateColor(id, color));
   };
 
   const handleDelete = (id) => {
-    dispatch(removed(id));
-    toast.error("Todo removed successfully", {
-      autoClose:900
+    dispatch(removeTodo(id));
+    toast.error(`${text} has been removed successfully`, {
+      autoClose: 900,
     });
   };
 
   return (
     <div className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0">
       <div
-        className={` rounded-full bg-white border-2 border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 ${
+        className={`relative rounded-full bg-white border-2 border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 ${
           completed && "border-green-500 focus-within:border-green-500"
         } `}
       >
@@ -36,7 +38,7 @@ const TodoItem = ({ todo }) => {
           onChange={() => {
             handleStatusChange(id);
           }}
-          className="opacity-0 absolute rounded-full"
+          className="opacity-0 absolute rounded-full cursor-pointer"
         />
 
         {completed && (
@@ -49,7 +51,9 @@ const TodoItem = ({ todo }) => {
         )}
       </div>
 
-      <div className={`select-none flex-1 ${completed && 'line-through'}`}>{text}</div>
+      <div className={`select-none flex-1 ${completed && "line-through"}`}>
+        {text}
+      </div>
 
       <div
         className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-green-500 hover:bg-green-500 ${
